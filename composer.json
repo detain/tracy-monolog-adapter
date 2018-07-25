@@ -12,9 +12,9 @@
 		"issues": "https://github.com/nextras/tracy-monolog-adapter/issues"
 	},
 	"require": {
-		"php": ">=7.0",
-		"tracy/tracy": "~2.3",
-		"monolog/monolog": "~1.9"
+		"php": ">=5.4",
+		"tracy/tracy": "~2.5.0",
+		"monolog/monolog": "~1.x-dev"
 	},
 	"require-dev": {
 		"nette/di": "~2.2"
