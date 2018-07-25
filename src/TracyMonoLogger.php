@@ -2,10 +2,10 @@
 
 /**
  * @license    New BSD License
- * @link       https://github.com/nextras/tracy-monolog-adapter
+ * @link       https://github.com/detain/tracy-monolog-adapter
  */
 
-namespace Nextras\TracyMonologAdapter;
+namespace Detain\TracyHasMono;
 
 use Monolog;
 use Throwable;
