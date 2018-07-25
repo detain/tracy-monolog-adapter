@@ -13,7 +13,7 @@ use Tracy\Helpers;
 use Tracy\ILogger;
 
 
-class Logger implements ILogger
+class TracyMonoLogger implements ILogger
 {
 	/** @const Tracy priority to Monolog priority mapping */
 	const PRIORITY_MAP = [
