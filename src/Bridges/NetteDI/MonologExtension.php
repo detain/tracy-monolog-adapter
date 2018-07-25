@@ -2,10 +2,10 @@
 
 /**
  * @license    New BSD License
- * @link       https://github.com/nextras/tracy-monolog-adapter
+ * @link       https://github.com/detain/tracy-monolog-adapter
  */
 
-namespace Nextras\TracyMonologAdapter\Bridges\NetteDI;
+namespace Detain\TracyHasMono\Bridges\NetteDI;
 
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonologLogger;
@@ -13,8 +13,8 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
 use Nette\DI\Statement;
 use Nette\PhpGenerator\ClassType;
-use Nextras\TracyMonologAdapter\Logger;
-use Nextras\TracyMonologAdapter\Processors\TracyExceptionProcessor;
+use Detain\TracyHasMono\Logger;
+use Detain\TracyHasMono\Processors\TracyExceptionProcessor;
 use Tracy\Debugger;
 
 

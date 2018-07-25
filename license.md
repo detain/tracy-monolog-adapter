@@ -1,6 +1,8 @@
 New BSD License
 ---------------
 
+Copyright (c) 2018 Joe Huss (https://www.interserver.net)
+
 Copyright (c) 2016 Nextras contributors (https://nextras.org)
 
 Copyright (c) 2004, 2014 David Grudl (https://davidgrudl.com)
@@ -18,7 +20,7 @@ are permitted provided that the following conditions are met:
 	this list of conditions and the following disclaimer in the documentation
 	and/or other materials provided with the distribution.
 
-	* Neither the name of "Clevis", "Nextras" nor the names of this software contributors
+	* Neither the name of "Clevis", "Detain" nor the names of this software contributors
 	may be used to endorse or promote products derived from this software
 	without specific prior written permission.
 

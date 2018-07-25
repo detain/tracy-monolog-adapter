@@ -1,26 +1,26 @@
 {
-	"name": "nextras/tracy-monolog-adapter",
+	"name": "detain/tracy-monolog-adapter",
 	"type": "library",
-	"description": "Nextras Tracy-Monolog Adapter",
-	"keywords": ["monolog", "nette", "nextras", "logger"],
-	"homepage": "https://github.com/nextras/tracy-monolog-adapter",
+	"description": "Detain Tracy-Monolog Adapter",
+	"keywords": ["monolog", "nette", "detain", "logger"],
+	"homepage": "https://github.com/detain/tracy-monolog-adapter",
 	"license": "BSD-3-Clause",
 	"authors": [
-		{ "name": "Nextras Project", "homepage": "https://github.com/nextras/tracy-monolog-adapter/graphs/contributors" }
+		{ "name": "Detain Project", "homepage": "https://github.com/detain/tracy-monolog-adapter/graphs/contributors" }
 	],
 	"support": {
-		"issues": "https://github.com/nextras/tracy-monolog-adapter/issues"
+		"issues": "https://github.com/detain/tracy-monolog-adapter/issues"
 	},
 	"require": {
 		"php": ">=5.4",
-		"tracy/tracy": "~2.5.0",
+		"tracy/tracy": "*",
 		"monolog/monolog": "~1.x-dev"
 	},
 	"require-dev": {
 		"nette/di": "~2.2"
 	},
 	"autoload": {
-		"psr-4": { "Nextras\\TracyMonologAdapter\\": "src/" }
+		"psr-4": { "Detain\\TracyHasMono\\": "src/" }
 	},
 	"extra": {
 		"branch-alias": {

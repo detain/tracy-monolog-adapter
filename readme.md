@@ -1,15 +1,15 @@
-Nextras Tracy-Monolog Adapter
+Detain Tracy-Monolog Adapter
 =============================
 
-[![Downloads this Month](https://img.shields.io/packagist/dm/nextras/tracy-monolog-adapter.svg?style=flat)](https://packagist.org/packages/nextras/tracy-monolog-adapter)
-[![Stable version](http://img.shields.io/packagist/v/nextras/tracy-monolog-adapter.svg?style=flat)](https://packagist.org/packages/nextras/tracy-monolog-adapter)
+[![Downloads this Month](https://img.shields.io/packagist/dm/detain/tracy-monolog-adapter.svg?style=flat)](https://packagist.org/packages/detain/tracy-monolog-adapter)
+[![Stable version](http://img.shields.io/packagist/v/detain/tracy-monolog-adapter.svg?style=flat)](https://packagist.org/packages/detain/tracy-monolog-adapter)
 
 ### Installation
 
 Use composer:
 
 ```bash
-$ composer require nextras/tracy-monolog-adapter
+$ composer require detain/tracy-monolog-adapter
 ```
 
 ### License
