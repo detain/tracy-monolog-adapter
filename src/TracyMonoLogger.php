@@ -45,11 +45,7 @@ class TracyMonoLogger implements ILogger
 			$context['exception'] = $message;
 			$message = '';
 		}
-
-		$this->monolog->addRecord(
-			self::PRIORITY_MAP[$priority] ?? Monolog\Logger::ERROR,
-			$message,
-			$context
-		);
+		$ret = self::PRIORITY_MAP[$priority];
+		$this->monolog->addRecord(!is_null($ret) ? $ret : Monolog\Logger::ERROR,$message,$context);
 	}
 }
