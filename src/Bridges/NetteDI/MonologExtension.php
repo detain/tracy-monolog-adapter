@@ -13,7 +13,7 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
 use Nette\DI\Statement;
 use Nette\PhpGenerator\ClassType;
-use Detain\TracyHasMono\Logger;
+use Detain\TracyHasMono\TracyMonoLogger;
 use Detain\TracyHasMono\Processors\TracyExceptionProcessor;
 use Tracy\Debugger;
 
@@ -50,7 +50,7 @@ class MonologExtension extends CompilerExtension
 		}
 
 		$builder->addDefinition($this->prefix('tracyLogger'))
-			->setClass(Logger::class)
+			->setClass(TracyMonoLogger::class)
 			->setArguments([$monologLogger]);
 
 		if ($builder->hasDefinition('tracy.logger')) {
