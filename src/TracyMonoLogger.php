@@ -12,7 +12,6 @@ use Throwable;
 use Tracy\Helpers;
 use Tracy\ILogger;
 
-
 class TracyMonoLogger implements ILogger
 {
 	/** @const Tracy priority to Monolog priority mapping */
@@ -46,6 +45,6 @@ class TracyMonoLogger implements ILogger
 			$message = '';
 		}
 		$ret = self::PRIORITY_MAP[$priority];
-		$this->monolog->addRecord(!is_null($ret) ? $ret : Monolog\Logger::ERROR,$message,$context);
+		$this->monolog->addRecord(!is_null($ret) ? $ret : Monolog\Logger::ERROR, $message, $context);
 	}
 }

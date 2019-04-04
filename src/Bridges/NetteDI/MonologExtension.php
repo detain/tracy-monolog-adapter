@@ -17,7 +17,6 @@ use Detain\TracyHasMono\TracyMonoLogger;
 use Detain\TracyHasMono\Processors\TracyExceptionProcessor;
 use Tracy\Debugger;
 
-
 class MonologExtension extends CompilerExtension
 {
 	public function loadConfiguration()
@@ -29,7 +28,6 @@ class MonologExtension extends CompilerExtension
 
 		if (isset($config['monolog'])) {
 			$monologLogger = $config['monolog'];
-
 		} else {
 			$builder->addDefinition($this->prefix('handler'))
 				->setClass(RotatingFileHandler::class)
