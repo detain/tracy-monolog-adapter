@@ -12,19 +12,16 @@
 		"issues": "https://github.com/detain/tracy-monolog-adapter/issues"
 	},
 	"require": {
-		"php": ">=5.4",
+		"php": ">=7.2",
 		"tracy/tracy": "*",
 		"monolog/monolog": "*"
 	},
 	"require-dev": {
-		"nette/di": "~2.2"
+		"nette/di": "~3.0"
 	},
 	"autoload": {
-		"psr-4": { "Detain\\TracyHasMono\\": "src/" }
 	},
 	"extra": {
-		"branch-alias": {
-			"dev-master": "0.1-dev"
-		}
+		"psr-4": { "Nextras\\TracyMonologAdapter\\": "src/" }
 	}
 }

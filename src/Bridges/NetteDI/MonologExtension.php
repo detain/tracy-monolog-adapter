@@ -11,7 +11,6 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger as MonologLogger;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
-use Nette\DI\Statement;
 use Nette\PhpGenerator\ClassType;
 use Detain\TracyHasMono\TracyMonoLogger;
 use Detain\TracyHasMono\Processors\TracyExceptionProcessor;
@@ -19,10 +18,12 @@ use Tracy\Debugger;
 
 class MonologExtension extends CompilerExtension
 {
-    public function loadConfiguration()
-    {
-        $builder = $this->getContainerBuilder();
-        $logDir = isset($builder->parameters['logDir']) ? Helpers::expand('%logDir%', $builder->parameters) : Debugger::$logDirectory;
+	public function loadConfiguration(): void
+	{
+		$builder = $this->getContainerBuilder();
+		$logDir = isset($builder->parameters['logDir']) ? Helpers::expand('%logDir%', $builder->parameters) : Debugger::$logDirectory;
+
+		$config = $this->getConfig();
 
         $config = $this->getConfig();
 
@@ -57,9 +58,9 @@ class MonologExtension extends CompilerExtension
     }
 
 
-    public function afterCompile(ClassType $class)
-    {
-        $initialize = $class->getMethod('initialize');
-        $initialize->addBody('\Tracy\Debugger::setLogger($this->getByType(\Tracy\ILogger::class));');
-    }
+	public function afterCompile(ClassType $class): void
+	{
+		$initialize = $class->getMethod('initialize');
+		$initialize->addBody('\Tracy\Debugger::setLogger($this->getByType(\Tracy\ILogger::class));');
+	}
 }
