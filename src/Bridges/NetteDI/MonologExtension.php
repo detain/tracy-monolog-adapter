@@ -18,12 +18,12 @@ use Tracy\Debugger;
 
 class MonologExtension extends CompilerExtension
 {
-	public function loadConfiguration(): void
-	{
-		$builder = $this->getContainerBuilder();
-		$logDir = isset($builder->parameters['logDir']) ? Helpers::expand('%logDir%', $builder->parameters) : Debugger::$logDirectory;
+    public function loadConfiguration(): void
+    {
+        $builder = $this->getContainerBuilder();
+        $logDir = isset($builder->parameters['logDir']) ? Helpers::expand('%logDir%', $builder->parameters) : Debugger::$logDirectory;
 
-		$config = $this->getConfig();
+        $config = $this->getConfig();
 
         $config = $this->getConfig();
 
@@ -58,9 +58,9 @@ class MonologExtension extends CompilerExtension
     }
 
 
-	public function afterCompile(ClassType $class): void
-	{
-		$initialize = $class->getMethod('initialize');
-		$initialize->addBody('\Tracy\Debugger::setLogger($this->getByType(\Tracy\ILogger::class));');
-	}
+    public function afterCompile(ClassType $class): void
+    {
+        $initialize = $class->getMethod('initialize');
+        $initialize->addBody('\Tracy\Debugger::setLogger($this->getByType(\Tracy\ILogger::class));');
+    }
 }
