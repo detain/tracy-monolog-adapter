@@ -31,7 +31,7 @@ class TracyExceptionProcessor
 	{
 		foreach (['exception', 'error'] as $key) {
 			if (isset($record['context'][$key]) && $record['context'][$key] instanceof Throwable) {
-				list($justCreated, $exceptionFileName) = $this->logException($record['context'][$key]);
+				[$justCreated, $exceptionFileName] = $this->logException($record['context'][$key]);
 				$record['context']['tracy_filename'] = basename($exceptionFileName);
 				$record['context']['tracy_created'] = $justCreated;
 				$record['message'] = $record['message'] ?: self::formatMessage($record['context'][$key]);
