@@ -13,7 +13,7 @@
 	},
 	"require": {
 		"php": ">=7.2",
-		"tracy/tracy": "~2.4",
+		"tracy/tracy": "~2.10",
 		"monolog/monolog": "~2.0"
 	},
 	"require-dev": {
