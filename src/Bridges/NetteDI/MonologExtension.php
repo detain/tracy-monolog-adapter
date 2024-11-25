@@ -31,17 +31,17 @@ class MonologExtension extends CompilerExtension
             $monologLogger = $config['monolog'];
         } else {
             $builder->addDefinition($this->prefix('handler'))
-                ->setClass(RotatingFileHandler::class)
+                ->setType(RotatingFileHandler::class)
                 ->setArguments([$logDir . '/nette.log'])
                 ->setAutowired(false);
 
             $builder->addDefinition($this->prefix('tracyExceptionProcessor'))
-                ->setClass(TracyExceptionProcessor::class)
+                ->setType(TracyExceptionProcessor::class)
                 ->setArguments([$logDir, '@Tracy\BlueScreen'])
                 ->setAutowired(false);
 
             $monologLogger = $builder->addDefinition($this->prefix('monologLogger'))
-                ->setClass(MonologLogger::class)
+                ->setType(MonologLogger::class)
                 ->setArguments(['nette'])
                 ->addSetup('pushHandler', ['@' . $this->prefix('handler')])
                 ->addSetup('pushProcessor', ['@' . $this->prefix('tracyExceptionProcessor')])
@@ -49,7 +49,7 @@ class MonologExtension extends CompilerExtension
         }
 
         $builder->addDefinition($this->prefix('tracyLogger'))
-            ->setClass(TracyMonoLogger::class)
+            ->setType(TracyMonoLogger::class)
             ->setArguments([$monologLogger]);
 
         if ($builder->hasDefinition('tracy.logger')) {

@@ -92,7 +92,7 @@ class TracyExceptionProcessor
         while ($message) {
             $tmp[] = ($message instanceof \ErrorException
                 ? Helpers::errorTypeToString($message->getSeverity()) . ': ' . $message->getMessage()
-                : Helpers::getClass($message) . ': ' . $message->getMessage()
+                : get_class($message) . ': ' . $message->getMessage()
             ) . ' in ' . $message->getFile() . ':' . $message->getLine();
             $message = $message->getPrevious();
         }
