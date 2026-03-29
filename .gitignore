@@ -1,2 +1,5 @@
 /vendor
 /composer.lock
+
+# Caliber local state
+.caliber/
