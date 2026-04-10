@@ -8,6 +8,7 @@
 namespace Nextras\TracyMonologAdapter;
 
 use Monolog;
+use Monolog\Level;
 use Throwable;
 use Tracy\Helpers;
 use Tracy\ILogger;
@@ -16,12 +17,12 @@ class Logger implements ILogger
 {
     /** @const Tracy priority to Monolog priority mapping */
     protected const PRIORITY_MAP = [
-        self::DEBUG => Monolog\Logger::DEBUG,
-        self::INFO => Monolog\Logger::INFO,
-        self::WARNING => Monolog\Logger::WARNING,
-        self::ERROR => Monolog\Logger::ERROR,
-        self::EXCEPTION => Monolog\Logger::CRITICAL,
-        self::CRITICAL => Monolog\Logger::CRITICAL,
+        self::DEBUG => Level::Debug,
+        self::INFO => Level::Info,
+        self::WARNING => Level::Warning,
+        self::ERROR => Level::Error,
+        self::EXCEPTION => Level::Critical,
+        self::CRITICAL => Level::Critical,
     ];
 
     /** @var Monolog\Logger */
@@ -45,8 +46,8 @@ class Logger implements ILogger
             $message = '';
         }
 
-        $this->monolog->addRecord(
-            self::PRIORITY_MAP[$priority] ?? Monolog\Logger::ERROR,
+        $this->monolog->log(
+            self::PRIORITY_MAP[$priority] ?? Level::Error,
             $message,
             $context
         );

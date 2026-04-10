@@ -7,6 +7,7 @@
 
 namespace Detain\TracyHasMono\Processors;
 
+use Monolog\LogRecord;
 use Throwable;
 use Tracy\BlueScreen;
 use Tracy\Helpers;
@@ -27,14 +28,16 @@ class TracyExceptionProcessor
     }
 
 
-    public function __invoke(array $record): array
+    public function __invoke(LogRecord $record): LogRecord
     {
         foreach (['exception', 'error'] as $key) {
-            if (isset($record['context'][$key]) && $record['context'][$key] instanceof Throwable) {
-                [$justCreated, $exceptionFileName] = $this->logException($record['context'][$key]);
-                $record['context']['tracy_filename'] = basename($exceptionFileName);
-                $record['context']['tracy_created'] = $justCreated;
-                $record['message'] = $record['message'] ?: self::formatMessage($record['context'][$key]);
+            if (isset($record->context[$key]) && $record->context[$key] instanceof Throwable) {
+                [$justCreated, $exceptionFileName] = $this->logException($record->context[$key]);
+                $context = $record->context;
+                $context['tracy_filename'] = basename($exceptionFileName);
+                $context['tracy_created'] = $justCreated;
+                $message = $record->message ?: self::formatMessage($record->context[$key]);
+                $record = $record->with(message: $message, context: $context);
                 break;
             }
         }
