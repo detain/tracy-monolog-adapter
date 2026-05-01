@@ -1,27 +1,44 @@
 {
 	"name": "detain/tracy-monolog-adapter",
 	"type": "library",
-	"description": "Detain Tracy-Monolog Adapter",
-	"keywords": ["monolog", "nette", "detain", "logger"],
+	"description": "Bridges the Tracy debugger with the Monolog logger so Tracy log output is routed through Monolog handlers and processors.",
+	"keywords": ["monolog", "nette", "tracy", "detain", "logger", "adapter", "bridge"],
 	"homepage": "https://github.com/detain/tracy-monolog-adapter",
 	"license": "BSD-3-Clause",
 	"authors": [
-		{ "name": "Detain Project", "homepage": "https://github.com/detain/tracy-monolog-adapter/graphs/contributors" }
+		{
+			"name": "Detain Project",
+			"homepage": "https://github.com/detain/tracy-monolog-adapter/graphs/contributors"
+		}
 	],
 	"support": {
-		"issues": "https://github.com/detain/tracy-monolog-adapter/issues"
+		"issues": "https://github.com/detain/tracy-monolog-adapter/issues",
+		"source": "https://github.com/detain/tracy-monolog-adapter"
 	},
 	"require": {
-		"php": ">=7.2",
-		"tracy/tracy": "*",
-		"monolog/monolog": "*"
+		"php": ">=8.1",
+		"tracy/tracy": "^2.10",
+		"monolog/monolog": "^3.0"
 	},
 	"require-dev": {
-		"nette/di": "~3.0"
+		"nette/di": "^3.0",
+		"phpunit/phpunit": "^9.5 || ^10.0"
+	},
+	"suggest": {
+		"nette/di": "Required for the optional Nette DI bridge in src/Bridges/NetteDI/."
 	},
 	"autoload": {
+		"psr-4": {
+			"Detain\\TracyHasMono\\": "src/",
+			"Nextras\\TracyMonologAdapter\\": "src/"
+		}
 	},
-	"extra": {
-		"psr-4": { "Nextras\\TracyMonologAdapter\\": "src/" }
+	"autoload-dev": {
+		"psr-4": {
+			"Detain\\TracyHasMono\\Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"test": "phpunit"
 	}
 }
