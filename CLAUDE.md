@@ -12,7 +12,7 @@ composer require detain/tracy-monolog-adapter
 ## Architecture
 
 **Core classes:**
-- `src/TracyMonoLogger.php` — primary `Tracy\ILogger` impl (`Detain\TracyHasMono` namespace); maps Tracy priorities via `PRIORITY_MAP` to Monolog levels, forwards to `Monolog\Logger::addRecord()`
+- `src/TracyMonoLogger.php` — primary `Tracy\ILogger` impl (`Detain\TracyHasMono` namespace); maps Tracy priorities via `PRIORITY_MAP` to Monolog `Level` enum values, forwards to `Monolog\Logger::log()`
 - `src/Logger.php` — legacy impl (`Nextras\TracyMonologAdapter` namespace); nearly identical to `TracyMonoLogger`; keep for BC
 - `src/Processors/TracyExceptionProcessor.php` — Monolog processor; intercepts `Throwable` in record context, renders BlueScreen HTML to log dir via `Tracy\BlueScreen::render()`
 - `src/Bridges/NetteDI/MonologExtension.php` — `Nette\DI\CompilerExtension`; wires `RotatingFileHandler`, `TracyExceptionProcessor`, `MonologLogger`, and `TracyMonoLogger` into the DI container; replaces `tracy.logger` service
@@ -21,24 +21,22 @@ composer require detain/tracy-monolog-adapter
 - `Detain\TracyHasMono\` → `src/` (active namespace for `TracyMonoLogger`, `Processors\`, `Bridges\`)
 - `Nextras\TracyMonologAdapter\` → `src/Logger.php` only (legacy)
 
-**Known issue:** `composer.json` has `psr-4` under `extra` instead of `autoload` — fix by moving to `autoload.psr-4`.
-
 ## Priority Mapping
 
 | Tracy constant | Monolog level |
 |---|---|
-| `DEBUG` | `Logger::DEBUG` |
-| `INFO` | `Logger::INFO` |
-| `WARNING` | `Logger::WARNING` |
-| `ERROR` | `Logger::ERROR` |
-| `EXCEPTION` | `Logger::CRITICAL` |
-| `CRITICAL` | `Logger::CRITICAL` |
+| `DEBUG` | `Level::Debug` |
+| `INFO` | `Level::Info` |
+| `WARNING` | `Level::Warning` |
+| `ERROR` | `Level::Error` |
+| `EXCEPTION` | `Level::Critical` |
+| `CRITICAL` | `Level::Critical` |
 
-Defined in `TracyMonoLogger::PRIORITY_MAP` and mirrored in `Logger::PRIORITY_MAP`.
+Defined in `TracyMonoLogger::PRIORITY_MAP` and mirrored in `Logger::PRIORITY_MAP`. Unknown priorities fall back to `Level::Error`.
 
 ## Conventions
 
-- Processors must be callable (`__invoke(array $record): array`) — see `TracyExceptionProcessor::__invoke()`
+- Processors must be callable (`__invoke(LogRecord $record): LogRecord`) — see `TracyExceptionProcessor::__invoke()`
 - Exception HTML files named `exception--Y-m-d--H-i--{hash}.html`, written to Tracy `$logDirectory`
 - `MonologExtension` checks for `config['monolog']` override before building default handler stack
 - `afterCompile()` in `MonologExtension` registers logger via `\Tracy\Debugger::setLogger()`
@@ -47,6 +45,7 @@ Defined in `TracyMonoLogger::PRIORITY_MAP` and mirrored in `Logger::PRIORITY_MAP
 ## Development Commands
 
 ```bash
+composer test
 composer dump-autoload
 ```
 
@@ -75,3 +74,20 @@ If `caliber` is not found, tell the user: "This project uses Caliber for agent c
 Read `CALIBER_LEARNINGS.md` for patterns and anti-patterns learned from previous sessions.
 These are auto-extracted from real tool usage — treat them as project-specific rules.
 <!-- /caliber:managed:learnings -->
+
+<!-- caliber:managed:model-config -->
+## Model Configuration
+
+Recommended default: `claude-sonnet-4-6` with high effort (stronger reasoning; higher cost and latency than smaller models).
+Smaller/faster models trade quality for speed and cost — pick what fits the task.
+Pin your choice (`/model` in Claude Code, or `CALIBER_MODEL` when using Caliber with an API provider) so upstream default changes do not silently change behavior.
+
+<!-- /caliber:managed:model-config -->
+
+<!-- caliber:managed:sync -->
+## Context Sync
+
+This project uses [Caliber](https://github.com/caliber-ai-org/ai-setup) to keep AI agent configs in sync across Claude Code, Cursor, Copilot, and Codex.
+Configs update automatically before each commit via `caliber refresh`.
+If the pre-commit hook is not set up, run `/setup-caliber` to configure everything automatically.
+<!-- /caliber:managed:sync -->
